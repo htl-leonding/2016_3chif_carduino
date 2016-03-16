@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Carduino">
+  <ClassDiagramComponents>
+    <Class name="Carduino" package="carduino" visibility="public" xPosition="16.0" yPosition="39.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="start" returnType="void" visibility="public">
+          <Argument type="Stage" name="stage"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CarduinoController" package="carduino" visibility="public" xPosition="297.0" yPosition="39.0">
+      <Fields>
+        <Field name="upBtn" type="Button" visibility="private"/>
+        <Field name="label" type="Label" visibility="private"/>
+        <Field name="leftBtn" type="Button" visibility="private"/>
+        <Field name="downBtn" type="Button" visibility="private"/>
+        <Field name="rightBtn" type="Button" visibility="private"/>
+        <Field name="c" type="char" visibility="package"/>
+        <Field name="serial" type="Serial" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="upBtnAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="leftBtnAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="downBtnAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="rightBtnAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="location"/>
+          <Argument type="ResourceBundle" name="resources"/>
+        </Method>
+        <Method name="update" returnType="void" visibility="public">
+          <Argument type="Observable" name="o"/>
+          <Argument type="Object" name="arg"/>
+        </Method>
+        <Method name="keyPressed" returnType="void" visibility="private">
+          <Argument type="KeyEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Serial" package="carduino" visibility="public" xPosition="798.0" yPosition="39.0">
+      <Fields>
+        <Field name="serialPort" type="SerialPort" visibility="package"/>
+        <Field name="PORT_NAMES" type="String" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="input" type="BufferedReader" visibility="private"/>
+        <Field name="inputLine" type="String" visibility="private"/>
+        <Field name="output" type="OutputStream" visibility="private"/>
+        <Field name="TIME_OUT" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="DATA_RATE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getInputLine" returnType="String" visibility="public"/>
+        <Method name="setOutput" returnType="void" visibility="public">
+          <Argument type="char" name="c"/>
+        </Method>
+        <Method name="initialize" returnType="void" visibility="public"/>
+        <Method name="close" returnType="void" visibility="public" isSynchronized="true"/>
+        <Method name="serialEvent" returnType="void" visibility="public" isSynchronized="true">
+          <Argument type="SerialPortEvent" name="oEvent"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="serial" source="carduino.CarduinoController" target="carduino.Serial" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="carduino.Serial" target="carduino.Serial" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

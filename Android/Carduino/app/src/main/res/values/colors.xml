@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00a4ab</color>
+    <color name="colorPrimaryDark">#02797e</color>
+    <color name="colorAccent">#00a4ab</color>
+    <color name="legacy_primary_dark">#ffffff</color>
+    <color name="legacy_primary_dark_1">#ffffff</color>
+    <color name="black">#02797e</color>
+</resources>
