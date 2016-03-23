@@ -1,5 +1,7 @@
-package carduino;
+package controller;
 
+import model.Client;
+import model.Serial;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
@@ -13,7 +15,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
-public class CarduinoController implements Initializable, Observer{
+public class ClientViewController implements Initializable, Observer{
     
     Serial serial;
     Client client;

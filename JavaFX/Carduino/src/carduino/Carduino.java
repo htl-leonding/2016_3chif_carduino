@@ -12,10 +12,12 @@ public class Carduino extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("CarduinoView.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("CarduinoView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MenuView.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        //Für Seriel
          /*stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
            @Override
