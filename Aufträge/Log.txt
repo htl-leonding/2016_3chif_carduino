@@ -4,4 +4,5 @@ Aufgabe: 	JavaFX
 		Modi implementiren:	Serial - via Kabel zu "Debuggen"
 					Client - zum steuern
 		mit Startbildschirm, verschidenen Views
-Termin:	 bis zur nächsten Vorstellung lauffähig 
+Termin:	 bis zur nächsten Vorstellung, etwas vorweisen können!
+

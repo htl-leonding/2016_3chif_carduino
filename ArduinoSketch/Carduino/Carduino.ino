@@ -34,8 +34,13 @@ int sensorValue = 512;
 String commant;
 char c;
 
-const char* ssid = "andi-hotspot";
-const char* password = "oscaryim";
+//Schul W-Lan
+/*const char* ssid = "andi-hotspot";
+const char* password = "oscaryim";*/
+
+//Daham
+const char* ssid = "3WebCube6352";
+const char* password = "1D3fcf8d";
 
 WiFiServer server(1337);
 static WiFiClient client;

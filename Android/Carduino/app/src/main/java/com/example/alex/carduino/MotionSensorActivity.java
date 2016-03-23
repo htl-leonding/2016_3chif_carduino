@@ -21,6 +21,11 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
     private TextView yAxis;
     private TextView zAxis;
 
+    public static final char UP = 'w';
+    public static final char DOWN = 's';
+    public static final char DIRECTION = 'd';
+    String actProgress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +46,14 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
         xAxis.setText(String.valueOf(event.values[0]));
         yAxis.setText(String.valueOf(event.values[1]));
         zAxis.setText(String.valueOf(event.values[2]));
+
+        if (event.values[2] > 5.50) {
+            actProgress = UP + String.valueOf((int)((event.values[2] - 5) * 204.8));
+        }
+        else if (event.values[2] < 4.50) {
+            actProgress = DOWN + String.valueOf((int)((5 - event.values[2]) * 204.8));
+        }
+        new Thread(new ClientSocket(actProgress)).start();
 
     }
 
