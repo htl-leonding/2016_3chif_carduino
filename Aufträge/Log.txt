@@ -1,8 +1,0 @@
-Auftrag vom 10.03.16: 
-Schicker, Mair, Mistlberger 
-Aufgabe: 	JavaFX
-		Modi implementiren:	Serial - via Kabel zu "Debuggen"
-					Client - zum steuern
-		mit Startbildschirm, verschidenen Views
-Termin:	 bis zur nächsten Vorstellung, etwas vorweisen können!
-
