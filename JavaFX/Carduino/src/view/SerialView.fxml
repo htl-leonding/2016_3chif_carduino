@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="195.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClientViewController">
+<AnchorPane id="AnchorPane" prefHeight="195.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SerialViewController">
     <children>
       <HBox alignment="CENTER" layoutX="176.0" layoutY="14.0" prefHeight="34.0" prefWidth="255.0" AnchorPane.rightAnchor="1.0">
          <children>
