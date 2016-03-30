@@ -3,15 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/controller/SerialViewController.java</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/view/SerialView.fxml</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/model/Serial.java</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/view/ClientView.fxml</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/view/MenuView.fxml</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/controller/MenuViewController.java</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/carduino/Carduino.java</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/model/Client.java</file>
-            <file>file:/C:/Users/Alex/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/controller/ClientViewController.java</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/controller/SerialViewController.java</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/model/Client.java</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/carduino/Carduino.java</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/view/ControlledScreen.java</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/view/ScreensController.java</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/controller/ClientViewController.java</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/model/Serial.java</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/view/MenuView.fxml</file>
+            <file>file:/C:/Users/Tobias/Documents/GitHub/2016_3chif_carduino/JavaFX/Carduino/src/controller/MenuViewController.java</file>
         </group>
     </open-files>
 </project-private>

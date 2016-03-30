@@ -5,17 +5,25 @@
  */
 package controller;
 
+import carduino.Carduino;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import view.ControlledScreen;
+import view.ScreensController;
 
 /**
  * FXML Controller class
  *
  * @author Alex
  */
-public class MenuViewController implements Initializable {
-
+public class MenuViewController implements Initializable , ControlledScreen 
+{
+    
+    ScreensController myController;
+    
     /**
      * Initializes the controller class.
      */
@@ -23,5 +31,22 @@ public class MenuViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void StartSerial(ActionEvent event) 
+    {
+        myController.setScreen(Carduino.screenSerialID);
+    }
+
+    @FXML
+    private void StartClient(ActionEvent event) 
+    {
+        myController.setScreen(Carduino.screenClientID);
+    }
+
+    @Override
+    public void setScreenParent(ScreensController screenParent){
+        myController = screenParent;
+    }
     
 }

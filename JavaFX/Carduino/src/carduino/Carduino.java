@@ -1,23 +1,40 @@
 package carduino;
 
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import static javafx.application.Application.launch;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import view.ScreensController;
 
 public class Carduino extends Application {
-
+  
+    public static String screenMenuID = "menu";
+    public static String screenMenuFile = "MenuView.fxml";
+    public static String screenClientID = "client";
+    public static String screenClientFile = "ClientView.fxml";
+    public static String screenSerialID = "serial";
+    public static String screenSerialFile = "SerialView.fxml";
+    
+    
     @Override
-    public void start(Stage stage) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("CarduinoView.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("MenuView.fxml"));
+    public void start(Stage primaryStage) 
+    {
+
+        ScreensController mainContainer = new ScreensController();
+        mainContainer.loadScreen(Carduino.screenMenuID, Carduino.screenMenuFile);
+        mainContainer.loadScreen(Carduino.screenClientID, Carduino.screenClientFile);
+        mainContainer.loadScreen(Carduino.screenSerialID, Carduino.screenSerialFile);
+        
+        mainContainer.setScreen(Carduino.screenMenuID);
+        
+        Group root = new Group();
+        root.getChildren().addAll(mainContainer);
         Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        //Für Seriel
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }  
+            //Für Seriel
          /*stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
            @Override
@@ -25,9 +42,8 @@ public class Carduino extends Application {
                 Serial.serialPort.close();
             }
         });*/
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         launch(args);
     }
 }

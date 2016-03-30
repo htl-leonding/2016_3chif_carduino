@@ -1,5 +1,6 @@
 package controller;
 
+import carduino.Carduino;
 import model.Client;
 import model.Serial;
 import java.net.URL;
@@ -9,13 +10,17 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import view.ControlledScreen;
+import view.ScreensController;
 
-public class ClientViewController implements Initializable, Observer{
+public class ClientViewController implements Initializable, Observer, ControlledScreen
+{
     
     Serial serial;
     Client client;
@@ -23,6 +28,7 @@ public class ClientViewController implements Initializable, Observer{
     public static final char UP = 'w'; 
     public static final char DOWN = 's';
     public static final char DIRECTION = 'd';
+    ScreensController myController;
    
 
     @FXML
@@ -35,6 +41,8 @@ public class ClientViewController implements Initializable, Observer{
     private Slider speedSlider;
     @FXML
     private Slider directionSlider;
+    @FXML
+    private Label speedlb1;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,6 +97,15 @@ public class ClientViewController implements Initializable, Observer{
             }
         });
     }
+    
+    @Override
+    public void setScreenParent(ScreensController screenParent){
+        myController = screenParent;
+    }
 
-
+    @FXML
+    private void BackToRoot(ActionEvent event) 
+    {
+        myController.setScreen(Carduino.screenMenuID);
+    }
 }

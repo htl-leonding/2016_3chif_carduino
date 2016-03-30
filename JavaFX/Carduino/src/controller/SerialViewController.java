@@ -5,24 +5,40 @@
  */
 package controller;
 
-import model.Serial;
+import carduino.Carduino;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import view.ControlledScreen;
+import view.ScreensController;
 
 /**
  * FXML Controller class
  *
  * @author Alex
  */
-public class SerialViewController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+public class SerialViewController implements Initializable, ControlledScreen
+{
+    
+    ScreensController myController;
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) 
+    {
         // TODO
     }    
+
+    @Override
+    public void setScreenParent(ScreensController screenParent) {
+        myController = screenParent;
+    }
+    
+    @FXML
+    private void BackToRoot(ActionEvent event) 
+    {
+        myController.setScreen(Carduino.screenMenuID);
+    }
     
 }
