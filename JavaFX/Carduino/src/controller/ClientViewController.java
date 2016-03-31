@@ -2,12 +2,8 @@ package controller;
 
 import carduino.Carduino;
 import model.Client;
-import model.Serial;
 import java.net.URL;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -16,13 +12,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import view.ControlledScreen;
-import view.ScreensController;
+import util.ControlledScreen;
 
-public class ClientViewController implements Initializable, Observer, ControlledScreen
+public class ClientViewController implements Initializable, ControlledScreen
 {
     
-    Serial serial;
     Client client;
     String commant;
     public static final char UP = 'w'; 
@@ -64,11 +58,6 @@ public class ClientViewController implements Initializable, Observer, Controlled
                     commant = DOWN + String.valueOf(Math.abs((int)speedSlider.getValue()));
                 }
                 client.sendData(commant);
-                /*try {
-                    serial.setOutput(commant);
-                } catch (IOException ex) {
-                    Logger.getLogger(CarduinoController.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
             }
         });
         directionSlider.valueProperty().addListener(new ChangeListener() {
@@ -77,26 +66,10 @@ public class ClientViewController implements Initializable, Observer, Controlled
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 commant = DIRECTION + String.valueOf((int)directionSlider.getValue());
                 client.sendData(commant);
-                /*try {
-                    serial.setOutput(commant);
-                } catch (IOException ex) {
-                    Logger.getLogger(CarduinoController.class.getName()).log(Level.SEVERE, null, ex);
-                }*/
             }
         });
         
     }    
-
-    @Override
-    public void update(Observable o, Object arg) {
-        Platform.runLater(new Runnable() {
-
-            @Override
-            public void run() {
-                recivelb.setText(serial.getInputLine());
-            }
-        });
-    }
     
     @Override
     public void setScreenParent(ScreensController screenParent){

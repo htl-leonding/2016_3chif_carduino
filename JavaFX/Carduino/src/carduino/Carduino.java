@@ -5,7 +5,7 @@ import static javafx.application.Application.launch;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.ScreensController;
+import controller.ScreensController;
 
 public class Carduino extends Application {
   

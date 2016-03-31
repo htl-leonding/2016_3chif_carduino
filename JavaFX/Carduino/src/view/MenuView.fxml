@@ -8,13 +8,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuViewController">
+<AnchorPane id="AnchorPane" prefHeight="195.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuViewController">
    <children>
-      <Button layoutX="176.0" layoutY="185.0" mnemonicParsing="false" onAction="#StartSerial" prefHeight="31.0" prefWidth="109.0" text="Start Serial">
+      <Button layoutX="75.0" layoutY="79.0" mnemonicParsing="false" onAction="#StartSerial" prefHeight="31.0" prefWidth="109.0" text="Start Serial">
          <font>
             <Font size="16.0" />
          </font></Button>
-      <Button layoutX="318.0" layoutY="185.0" mnemonicParsing="false" onAction="#StartClient" prefHeight="31.0" prefWidth="109.0" text="Start Client">
+      <Button layoutX="248.0" layoutY="79.0" mnemonicParsing="false" onAction="#StartClient" prefHeight="31.0" prefWidth="109.0" text="Start Client">
          <font>
             <Font size="16.0" />
          </font>
