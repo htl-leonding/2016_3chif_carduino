@@ -3,6 +3,7 @@ package com.example.alex.carduino;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
@@ -30,6 +31,7 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         xAxis = (TextView) findViewById(R.id.xOut);
         yAxis = (TextView) findViewById(R.id.yOut);
@@ -54,7 +56,7 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
             actProgress = DOWN + String.valueOf((int)((5 - event.values[2]) * 204.8));
         }
         new Thread(new ClientSocket(actProgress)).start();
-
+        zAxis.setText(String.valueOf(actProgress));
     }
 
     @Override
