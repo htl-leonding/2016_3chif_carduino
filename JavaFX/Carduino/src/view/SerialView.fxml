@@ -27,5 +27,6 @@
       <Slider fx:id="directionSlider" blockIncrement="1.0" layoutX="205.0" layoutY="91.0" max="1023.0" prefHeight="14.0" prefWidth="213.0" value="512.0" />
       <Button layoutX="338.0" layoutY="147.0" mnemonicParsing="false" onAction="#BackToRoot" prefHeight="34.0" prefWidth="80.0" text="Menu" />
       <Label fx:id="speedlb1" layoutX="10.0" layoutY="10.0" prefHeight="17.0" prefWidth="40.0" text="Serial" />
+      <Button layoutX="244.0" layoutY="147.0" mnemonicParsing="false" onAction="#DebugSerial" prefHeight="34.0" prefWidth="80.0" text="Test" />
     </children>
 </AnchorPane>
