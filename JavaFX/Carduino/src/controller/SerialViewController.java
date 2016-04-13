@@ -6,10 +6,13 @@
 package controller;
 
 import carduino.Carduino;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -69,7 +72,7 @@ public class SerialViewController implements Initializable, ControlledScreen, Ob
                 else if ((int)speedSlider.getValue() < 0) {
                     commant = DOWN + String.valueOf(Math.abs((int)speedSlider.getValue()));
                 }
-                serial.setOutput(commant);
+                //serial.setOutput(commant);
 
             }
         });
@@ -78,7 +81,7 @@ public class SerialViewController implements Initializable, ControlledScreen, Ob
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 commant = DIRECTION + String.valueOf((int)directionSlider.getValue());
-                serial.setOutput(commant);
+                //serial.setOutput(commant);
             }
         });
     }  
@@ -106,17 +109,28 @@ public class SerialViewController implements Initializable, ControlledScreen, Ob
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("Testvorgang");
         
-        for(int i = 0; i < (int) speedSlider.getMax();i =i + 10){
-            commant = UP + String.valueOf((int)speedSlider.getValue());
-            serial.setOutput(commant);
+        /*Lenkungstest*/
+        
+        /*Beschleunigugstest*/ 
+        try {
+            for(int i = 0; i < 1024; i += 10) {
+                commant = UP + String.valueOf(i);
+                serial.setOutput(commant);
+            }
+            for(int i = 0; i < 1024; i += 10) {
+                commant = DOWN + String.valueOf(i);
+                serial.setOutput(commant);
+            }
+            
+        } catch (IOException | NullPointerException ex) {
+            //Beschleunigung gescheitert
+            System.out.println("failed");
         }
-        for(int i = (int) speedSlider.getMax();i > 0;i = i - 10){
-            commant = DOWN + String.valueOf(Math.abs((int)speedSlider.getValue()));
-            serial.setOutput(commant);
-        }
+
         a.setHeaderText("TEST ABGESCHLOSSEN");
         a.setContentText("Alles funkionsfähig!!");
 
-        a.showAndWait();
+        //a.showAndWait();
     }
+
 }
