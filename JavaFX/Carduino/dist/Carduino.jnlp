@@ -7,8 +7,8 @@
     <offline-allowed/>
   </information>
   <resources>
-    <j2se version="1.6+" java-vm-args="-Djava.library.path=C:\Users\Alex\Dropbox\SYP\JavaFX\Carduino\rxtx-2.1-7-bins-r2\Windows\i368-mingw32;%PATH% "  href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Carduino.jar" size="17912" download="eager" />
+    <j2se version="1.6+" java-vm-args="-Djava.library.path=.\rxtx-2.1-7-bins-r2\Windows\i368-mingw32;%PATH% "  href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="Carduino.jar" size="18594" download="eager" />
     <jar href="lib\RXTXcomm.jar" size="59464" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Carduino" >

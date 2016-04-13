@@ -41,7 +41,7 @@ public class Serial extends Observable implements SerialPortEventListener {
     public void setOutput(String s)  {
         try {
             this.output.write(s.getBytes());
-        } catch (IOException ex) {
+        } catch (IOException | NullPointerException ex) {
             System.out.println("Nicht verbunden");
         }
     }
