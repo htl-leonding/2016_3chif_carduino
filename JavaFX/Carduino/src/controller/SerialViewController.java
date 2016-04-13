@@ -15,6 +15,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -96,5 +97,26 @@ public class SerialViewController implements Initializable, ControlledScreen, Ob
     @Override
     public void update(Observable o, Object arg) {
         recivelb.setText(serial.getInputLine());
+    }
+    
+    //speedSlider testen
+
+    @FXML
+    private void DebugSerial(ActionEvent event) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Testvorgang");
+        
+        for(int i = 0; i < (int) speedSlider.getMax();i =i + 10){
+            commant = UP + String.valueOf((int)speedSlider.getValue());
+            serial.setOutput(commant);
+        }
+        for(int i = (int) speedSlider.getMax();i > 0;i = i - 10){
+            commant = DOWN + String.valueOf(Math.abs((int)speedSlider.getValue()));
+            serial.setOutput(commant);
+        }
+        a.setHeaderText("TEST ABGESCHLOSSEN");
+        a.setContentText("Alles funkionsfähig!!");
+
+        a.showAndWait();
     }
 }
