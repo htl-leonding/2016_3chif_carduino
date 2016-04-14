@@ -38,12 +38,8 @@ public class Serial extends Observable implements SerialPortEventListener {
 
     private static final int DATA_RATE = 115200;
 
-    public void setOutput(String s)  {
-        try {
+    public void setOutput(String s) throws IOException, NullPointerException  {
             this.output.write(s.getBytes());
-        } catch (IOException ex) {
-            System.out.println("Nicht verbunden");
-        }
     }
 
     public void initialize() {

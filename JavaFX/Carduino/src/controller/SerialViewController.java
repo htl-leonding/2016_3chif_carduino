@@ -6,15 +6,19 @@
 package controller;
 
 import carduino.Carduino;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -68,7 +72,7 @@ public class SerialViewController implements Initializable, ControlledScreen, Ob
                 else if ((int)speedSlider.getValue() < 0) {
                     commant = DOWN + String.valueOf(Math.abs((int)speedSlider.getValue()));
                 }
-                serial.setOutput(commant);
+                //serial.setOutput(commant);
 
             }
         });
@@ -77,7 +81,7 @@ public class SerialViewController implements Initializable, ControlledScreen, Ob
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 commant = DIRECTION + String.valueOf((int)directionSlider.getValue());
-                serial.setOutput(commant);
+                //serial.setOutput(commant);
             }
         });
     }  
@@ -97,4 +101,36 @@ public class SerialViewController implements Initializable, ControlledScreen, Ob
     public void update(Observable o, Object arg) {
         recivelb.setText(serial.getInputLine());
     }
+    
+    //speedSlider testen
+
+    @FXML
+    private void DebugSerial(ActionEvent event) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Testvorgang");
+        
+        /*Lenkungstest*/
+        
+        /*Beschleunigugstest*/ 
+        try {
+            for(int i = 0; i < 1024; i += 10) {
+                commant = UP + String.valueOf(i);
+                serial.setOutput(commant);
+            }
+            for(int i = 0; i < 1024; i += 10) {
+                commant = DOWN + String.valueOf(i);
+                serial.setOutput(commant);
+            }
+            
+        } catch (IOException | NullPointerException ex) {
+            //Beschleunigung gescheitert
+            System.out.println("failed");
+        }
+
+        a.setHeaderText("TEST ABGESCHLOSSEN");
+        a.setContentText("Alles funkionsfähig!!");
+
+        //a.showAndWait();
+    }
+
 }
