@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import controller.ScreensController;
+import java.util.Properties;
 
 public class Carduino extends Application {
   
@@ -44,6 +45,19 @@ public class Carduino extends Application {
         });*/
     public static void main(String[] args) 
     {
+        String os = "os.name";
+        String result;
+        Properties prop = System.getProperties( );
+        result = prop.getProperty(os);
+        
+        System.out.println(result);
+        System.out.println("");
+        if(result == "Mac OS X"){
+            System.setProperty("java.library.path", "/Library/Java/Extensions");
+        }
+        else{
+            System.setProperty("java.library.path", ".\\rxtx-2.1-7-bins-r2\\Windows\\i368-mingw32");            
+        }
         launch(args);
     }
 }
