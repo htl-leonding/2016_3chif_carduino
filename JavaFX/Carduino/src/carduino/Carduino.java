@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import controller.ScreensController;
+import java.lang.reflect.Field;
 import java.util.Properties;
 
 public class Carduino extends Application {
@@ -43,20 +44,18 @@ public class Carduino extends Application {
                 Serial.serialPort.close();
             }
         });*/
-    public static void main(String[] args) 
+    public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException 
     {
         String os = "os.name";
         String result;
         Properties prop = System.getProperties( );
         result = prop.getProperty(os);
         
-        System.out.println(result);
-        System.out.println("");
-        if(result == "Mac OS X"){
+        if(result.contains("Mac")){
             System.setProperty("java.library.path", "/Library/Java/Extensions");
-        }
-        else{
-            System.setProperty("java.library.path", ".\\rxtx-2.1-7-bins-r2\\Windows\\i368-mingw32");            
+            Field fieldSysPath = ClassLoader.class.getDeclaredField( "sys_paths" );
+            fieldSysPath.setAccessible( true );
+            fieldSysPath.set( null, null );
         }
         launch(args);
     }
