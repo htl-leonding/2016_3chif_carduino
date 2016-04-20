@@ -9,6 +9,8 @@ import carduino.Carduino;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -104,30 +106,32 @@ public class SerialViewController implements Initializable, ControlledScreen
     }
 
     private void setPicture(int steeringWorking, int engineWorking) {
-
+        char separatorChar = File.separatorChar;
+        Path path = Paths.get("file:" + System.getProperty("user.dir") + separatorChar + "src" + separatorChar + "res");
+        
         if(steeringWorking == 0){
-            Image img = new Image("file:../../../CheckedCarImage/lenkung_nt.png");
+            Image img = new Image(path.toString() + separatorChar + "lenkung_nt.png");
             steeringimgView.setImage(img);
         } 
         else if(steeringWorking == 1){
-            Image img = new Image("file:../../../CheckedCarImage/lenkung_nw.png");
+            Image img = new Image(path.toString() + separatorChar + "lenkung_nw.png");
             steeringimgView.setImage(img);
         }
         else if(steeringWorking == 2){
-            Image img = new Image("file:../../../CheckedCarImage/lenkung_w.png");
+            Image img = new Image(path.toString() + separatorChar + "lenkung_w.png");
             steeringimgView.setImage(img);
         }
         
         if(engineWorking == 0){
-            Image img = new Image("file:../../../CheckedCarImage/motor_nt.png");
+            Image img = new Image(path.toString() + separatorChar + "motor_nt.png");
             engineimgView.setImage(img);
         } 
         else if(engineWorking == 1){
-            Image img = new Image("file:../../../CheckedCarImage/motor_nw.png");
+            Image img = new Image(path.toString() + separatorChar + "motor_nw.png");
             engineimgView.setImage(img);
         }
         else if(engineWorking == 2){
-            Image img = new Image("file:../../../CheckedCarImage/motor_w.png");
+            Image img = new Image(path.toString() + separatorChar + "motor_w.png");
             engineimgView.setImage(img);
         }
     }
