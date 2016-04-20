@@ -97,7 +97,22 @@ public class SerialViewController implements Initializable, ControlledScreen
             System.out.println("failed");
             engineWorking = 1;
         }
-        
+        try{
+            for(int i = 514;i < 1024;i += 10)
+            {
+                commant = DIRECTION + String.valueOf(i);
+                serial.setOutput(commant);
+            }
+            for(int i = 1024;i > 0;i -= 10)
+            {
+                commant = DIRECTION + String.valueOf(i);
+                serial.setOutput(commant);
+            }
+            steeringWorking = 2;
+        }catch(IOException | NullPointerException ex){
+            System.out.println("failed");
+            steeringWorking = 1;
+        }   
         setPicture(steeringWorking, engineWorking);
         a.setHeaderText("TEST ABGESCHLOSSEN");
         a.setContentText("Alles funkionsfähig!!");
