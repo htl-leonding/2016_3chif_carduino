@@ -106,32 +106,29 @@ public class SerialViewController implements Initializable, ControlledScreen
     }
 
     private void setPicture(int steeringWorking, int engineWorking) {
-        char separatorChar = File.separatorChar;
-        Path path = Paths.get("file:" + System.getProperty("user.dir") + separatorChar + "src" + separatorChar + "res");
-        
         if(steeringWorking == 0){
-            Image img = new Image(path.toString() + separatorChar + "lenkung_nt.png");
+            Image img = new Image("file:src/res/lenkung_nt.png");
             steeringimgView.setImage(img);
         } 
         else if(steeringWorking == 1){
-            Image img = new Image(path.toString() + separatorChar + "lenkung_nw.png");
+            Image img = new Image("file:src/res/enkung_nw.png");
             steeringimgView.setImage(img);
         }
         else if(steeringWorking == 2){
-            Image img = new Image(path.toString() + separatorChar + "lenkung_w.png");
+            Image img = new Image("file:src/res/lenkung_w.png");
             steeringimgView.setImage(img);
         }
         
         if(engineWorking == 0){
-            Image img = new Image(path.toString() + separatorChar + "motor_nt.png");
+            Image img = new Image("file:src/res/motor_nt.png");
             engineimgView.setImage(img);
         } 
         else if(engineWorking == 1){
-            Image img = new Image(path.toString() + separatorChar + "motor_nw.png");
+            Image img = new Image("file:src/res/motor_nw.png");
             engineimgView.setImage(img);
         }
         else if(engineWorking == 2){
-            Image img = new Image(path.toString() + separatorChar + "motor_w.png");
+            Image img = new Image("file:src/res/motor_w.png");
             engineimgView.setImage(img);
         }
     }
