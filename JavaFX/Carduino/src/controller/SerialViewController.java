@@ -78,8 +78,6 @@ public class SerialViewController implements Initializable, ControlledScreen
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("Testvorgang");
         int steeringWorking = 0, engineWorking = 0; //0... noch nicht überprüft, 1... funktioniert nicht, 2... funktioniert
-
-        /*Lenkungstest*/
         
         /*Beschleunigugstest*/ 
         try {
@@ -97,13 +95,19 @@ public class SerialViewController implements Initializable, ControlledScreen
             System.out.println("failed");
             engineWorking = 1;
         }
+        /*Lenkungstest*/
         try{
-            for(int i = 514;i < 1024;i += 10)
+            for(int i = 514;i < 1024;i += 10) //Von der Mitte bis ganz rechts.
             {
                 commant = DIRECTION + String.valueOf(i);
                 serial.setOutput(commant);
             }
-            for(int i = 1024;i > 0;i -= 10)
+            for(int i = 1024;i > 0;i -= 10) //Von ganz rechts bis ganz links.
+            {
+                commant = DIRECTION + String.valueOf(i);
+                serial.setOutput(commant);
+            }
+            for(int i = 0;i < 514;i += 10) //Von ganz links wieder zurück in die Mitte.
             {
                 commant = DIRECTION + String.valueOf(i);
                 serial.setOutput(commant);
@@ -114,10 +118,6 @@ public class SerialViewController implements Initializable, ControlledScreen
             steeringWorking = 1;
         }   
         setPicture(steeringWorking, engineWorking);
-        a.setHeaderText("TEST ABGESCHLOSSEN");
-        a.setContentText("Alles funkionsfähig!!");
-
-        //a.showAndWait();
     }
 
     private void setPicture(int steeringWorking, int engineWorking) {
@@ -126,7 +126,7 @@ public class SerialViewController implements Initializable, ControlledScreen
             steeringimgView.setImage(img);
         } 
         else if(steeringWorking == 1){
-            Image img = new Image("file:src/res/enkung_nw.png");
+            Image img = new Image("file:src/res/lenkung_nw.png");
             steeringimgView.setImage(img);
         }
         else if(steeringWorking == 2){
