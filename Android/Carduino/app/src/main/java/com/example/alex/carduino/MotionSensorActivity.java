@@ -43,20 +43,29 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
 
     }
 
-    @Override
+       @Override
     public void onSensorChanged(SensorEvent event) {
         xAxis.setText(String.valueOf(event.values[0]));
         yAxis.setText(String.valueOf(event.values[1]));
-        zAxis.setText(String.valueOf(event.values[2]));
+        //zAxis.setText(String.valueOf(event.values[2]));
 
-        if (event.values[2] > 5.50) {
-            actProgress = UP + String.valueOf((int)((event.values[2] - 5) * 204.8));
+        if (event.values[2] > 5.50 && event.values[0] < 9) {
+            double val = (event.values[2] - 5) * 186.2;
+            if (val > 1024){
+                val = 1024;
+            }
+            actProgress = UP + String.valueOf((int)(val));
         }
-        else if (event.values[2] < 4.50) {
-            actProgress = DOWN + String.valueOf((int)((5 - event.values[2]) * 204.8));
+        else if (event.values[2] < 4.50 && event.values[0] > 9) {
+            double val = (5 - event.values[2]) * 186.2;
+            if (val > 1024){
+                val = 1024;
+            }
+            actProgress = DOWN + String.valueOf((int)(val));
         }
         new Thread(new ClientSocket(actProgress)).start();
         zAxis.setText(String.valueOf(actProgress));
+
     }
 
     @Override
