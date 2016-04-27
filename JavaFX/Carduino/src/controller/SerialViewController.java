@@ -6,25 +6,16 @@
 package controller;
 
 import carduino.Carduino;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.Serial;
@@ -35,7 +26,7 @@ import util.ControlledScreen;
  *
  * @author Alex
  */
-public class SerialViewController implements Initializable, ControlledScreen
+public class SerialViewController implements Initializable, ControlledScreen, Runnable
 {
     Serial serial;
     String commant;
@@ -43,6 +34,8 @@ public class SerialViewController implements Initializable, ControlledScreen
     public static final char DOWN = 's';
     public static final char DIRECTION = 'd';
     ScreensController myController;
+    int steeringWorking = 0, engineWorking = 0; //0... noch nicht überprüft, 1... funktioniert nicht, 2... funktioniert
+        
 
     @FXML
     private CheckBox stbyCheck;
@@ -54,10 +47,8 @@ public class SerialViewController implements Initializable, ControlledScreen
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        serial = new Serial();
-        serial.initialize();
-        setPicture(0, 0); //Es wird 0 übergeben da beim Start noch nichts überprüft wird.
-    }  
+        
+    }
 
     @Override
     public void setScreenParent(ScreensController screenParent) {
@@ -77,47 +68,8 @@ public class SerialViewController implements Initializable, ControlledScreen
     private void DebugSerial(ActionEvent event) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("Testvorgang");
-        int steeringWorking = 0, engineWorking = 0; //0... noch nicht überprüft, 1... funktioniert nicht, 2... funktioniert
-        
-        /*Beschleunigugstest*/ 
-        try {
-            for(int i = 0; i < 1024; i += 10) {
-                commant = UP + String.valueOf(i);
-                serial.setOutput(commant);
-            }
-            for(int i = 0; i < 1024; i += 10) {
-                commant = DOWN + String.valueOf(i);
-                serial.setOutput(commant);
-            }
-            engineWorking = 2;
-        } catch (IOException | NullPointerException ex) {
-            //Beschleunigung gescheitert
-            System.out.println("failed");
-            engineWorking = 1;
-        }
-        /*Lenkungstest*/
-        try{
-            for(int i = 514;i < 1024;i += 10) //Von der Mitte bis ganz rechts.
-            {
-                commant = DIRECTION + String.valueOf(i);
-                serial.setOutput(commant);
-            }
-            for(int i = 1024;i > 0;i -= 10) //Von ganz rechts bis ganz links.
-            {
-                commant = DIRECTION + String.valueOf(i);
-                serial.setOutput(commant);
-            }
-            for(int i = 0;i < 514;i += 10) //Von ganz links wieder zurück in die Mitte.
-            {
-                commant = DIRECTION + String.valueOf(i);
-                serial.setOutput(commant);
-            }
-            steeringWorking = 2;
-        }catch(IOException | NullPointerException ex){
-            System.out.println("failed");
-            steeringWorking = 1;
-        }   
-        setPicture(steeringWorking, engineWorking);
+        Thread t = new Thread(this);
+        t.start();
     }
 
     private void setPicture(int steeringWorking, int engineWorking) {
@@ -146,5 +98,63 @@ public class SerialViewController implements Initializable, ControlledScreen
             Image img = new Image("file:src/res/motor_w.png");
             engineimgView.setImage(img);
         }
+    }
+
+    @Override
+    public void run() {
+        serial = new Serial();
+        serial.initialize();
+        setPicture(0, 0); //Es wird 0 übergeben da beim Start noch nichts überprüft wird.
+  
+    /*Beschleunigugstest*/ 
+        try {
+            for(int i = 0; i < 1024; i += 64) {
+                commant = UP + String.valueOf(i);
+                serial.setOutput(commant);
+                Thread.sleep(500);
+            }
+            for(int i = 1024; i >= 0; i -= 64) {
+                commant = DOWN + String.valueOf(i);
+                serial.setOutput(commant);
+                Thread.sleep(500);
+            }
+            engineWorking = 2;
+        } catch (IOException | NullPointerException ex) {
+            //Beschleunigung gescheitert
+            System.out.println("failed");
+            engineWorking = 1;
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SerialViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setPicture(0, engineWorking); 
+        /*Lenkungstest*/
+        try{
+            for(int i = 514;i <= 1024;i += 64) //Von der Mitte bis ganz rechts.
+            {
+                commant = DIRECTION + String.valueOf(i);
+                Thread.sleep(500);
+                serial.setOutput(commant);
+            }
+            for(int i = 1024;i >= 0;i -= 64) //Von ganz rechts bis ganz links.
+            {
+                commant = DIRECTION + String.valueOf(i);
+                Thread.sleep(500);
+                serial.setOutput(commant);
+            }
+            for(int i = 0;i < 514;i += 64) //Von ganz links wieder zurück in die Mitte.
+            {
+                commant = DIRECTION + String.valueOf(i);
+                Thread.sleep(500);
+                serial.setOutput(commant);
+            }
+            steeringWorking = 2;
+        }catch(IOException | NullPointerException ex){
+            System.out.println("failed");
+            steeringWorking = 1;
+        } catch (InterruptedException ex) {
+            Logger.getLogger(SerialViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+        setPicture(steeringWorking, engineWorking); 
+        serial.close();
     }
 }
