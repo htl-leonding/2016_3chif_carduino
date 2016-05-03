@@ -7,25 +7,44 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="195.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClientViewController">
-    <children>
-      <HBox alignment="CENTER" layoutX="176.0" layoutY="14.0" prefHeight="34.0" prefWidth="255.0" AnchorPane.rightAnchor="1.0">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClientViewController">
+   <children>
+      <AnchorPane>
          <children>
-            <Label fx:id="recivelb" prefHeight="17.0" prefWidth="213.0">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin></Label>
-            <Label fx:id="speedlb" prefHeight="17.0" prefWidth="40.0" text="label">
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </Label>
+            <GridPane alignment="CENTER" cacheShape="false" centerShape="false" layoutY="1.0" prefHeight="204.0" prefWidth="442.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Slider fx:id="directionSlider" blockIncrement="1.0" max="1023.0" prefHeight="177.0" prefWidth="136.0" value="512.0" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+                  <Slider fx:id="speedSlider" blockIncrement="50.0" max="1023.0" min="-1023.0" orientation="VERTICAL" prefHeight="166.0" prefWidth="119.0" snapToPixel="false" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Slider>
+                  <Label fx:id="speedlb1" alignment="CENTER" contentDisplay="RIGHT" prefHeight="225.0" prefWidth="48.0" text="Client" textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Label>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="speedlb" text="label" />
+                        <Label fx:id="recivelb" prefHeight="17.0" prefWidth="213.0" />
+                     </children>
+                  </VBox>
+                  <CheckBox fx:id="stbyCheck" mnemonicParsing="false" prefHeight="107.0" prefWidth="125.0" text="STBY" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                  <Button mnemonicParsing="false" onAction="#ToMenu" prefHeight="25.0" prefWidth="111.0" text="Menu" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="190.0" minWidth="10.0" prefWidth="68.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="276.0" minWidth="10.0" prefWidth="141.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="251.0" minWidth="10.0" prefWidth="156.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="251.0" minWidth="10.0" prefWidth="156.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="168.0" minHeight="10.0" prefHeight="166.0" valignment="CENTER" vgrow="ALWAYS" />
+                  <RowConstraints maxHeight="37.0" minHeight="10.0" prefHeight="37.0" valignment="CENTER" vgrow="ALWAYS" />
+               </rowConstraints>
+            </GridPane>
          </children>
-      </HBox>
-      <CheckBox fx:id="stbyCheck" layoutX="181.0" layoutY="156.0" mnemonicParsing="false" text="STBY" />
-      <Slider fx:id="speedSlider" blockIncrement="50.0" layoutX="81.0" layoutY="12.0" max="1023.0" min="-1023.0" orientation="VERTICAL" prefHeight="156.0" prefWidth="14.0" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="10.0" />
-      <Slider fx:id="directionSlider" blockIncrement="1.0" layoutX="205.0" layoutY="91.0" max="1023.0" prefHeight="14.0" prefWidth="213.0" value="512.0" />
-      <Button layoutX="338.0" layoutY="147.0" mnemonicParsing="false" onAction="#BackToRoot" prefHeight="34.0" prefWidth="80.0" text="Menu" />
-      <Label fx:id="speedlb1" layoutX="25.0" layoutY="23.0" prefHeight="17.0" prefWidth="40.0" text="Client" />
-    </children>
-</AnchorPane>
+      </AnchorPane>
+   </children>
+</StackPane>

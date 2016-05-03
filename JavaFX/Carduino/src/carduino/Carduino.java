@@ -5,10 +5,12 @@ import static javafx.application.Application.launch;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import controller.ScreensController;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Properties;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 
 public class Carduino extends Application {
   
@@ -21,21 +23,13 @@ public class Carduino extends Application {
     
     
     @Override
-    public void start(Stage primaryStage) 
+    public void start(Stage stage) throws IOException 
     {
-
-        ScreensController mainContainer = new ScreensController();
-        mainContainer.loadScreen(Carduino.screenMenuID, Carduino.screenMenuFile);
-        mainContainer.loadScreen(Carduino.screenClientID, Carduino.screenClientFile);
-        mainContainer.loadScreen(Carduino.screenSerialID, Carduino.screenSerialFile);
-        
-        mainContainer.setScreen(Carduino.screenMenuID);
-        
-        Group root = new Group();
-        root.getChildren().addAll(mainContainer);
+        Parent root = FXMLLoader.load(getClass().getResource("/view/MenuView.fxml"));      
         Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.setTitle("Menu");
+        stage.show();
     }  
             //Für Seriel
          /*stage.setOnCloseRequest(new EventHandler<WindowEvent>() {

@@ -8,8 +8,8 @@
   </information>
   <resources>
     <j2se version="1.6+" java-vm-args="-Djava.library.path=.\rxtx-2.1-7-bins-r2\Windows\i368-mingw32; "  href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Carduino.jar" size="159873" download="eager" />
-    <jar href="lib/RXTXcomm.jar" size="59464" download="eager" />
+    <jar href="Carduino.jar" size="159154" download="eager" />
+    <jar href="lib\RXTXcomm.jar" size="59464" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="Carduino" >
     <param name="requiredFXVersion" value="8.0+"/>

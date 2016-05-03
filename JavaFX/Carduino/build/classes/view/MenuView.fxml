@@ -8,16 +8,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="195.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuViewController">
+<AnchorPane id="AnchorPane" fx:id="MenuPane" prefHeight="195.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuViewController">
    <children>
-      <Button layoutX="75.0" layoutY="79.0" mnemonicParsing="false" onAction="#StartSerial" prefHeight="31.0" prefWidth="109.0" text="Start Serial">
-         <font>
-            <Font size="16.0" />
-         </font></Button>
-      <Button layoutX="248.0" layoutY="79.0" mnemonicParsing="false" onAction="#StartClient" prefHeight="31.0" prefWidth="109.0" text="Start Client">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Button>
+      <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="buttonClient" mnemonicParsing="false" onAction="#StartClient" prefHeight="31.0" prefWidth="109.0" text="Start Client" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="buttonSerial" mnemonicParsing="false" onAction="#StartSerial" prefHeight="31.0" prefWidth="109.0" text="Start Serial" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

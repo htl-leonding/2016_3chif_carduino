@@ -13,27 +13,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.Serial;
-import util.ControlledScreen;
 
 /**
  * FXML Controller class
  *
  * @author Alex
  */
-public class SerialViewController implements Initializable, ControlledScreen, Runnable
+public class SerialViewController implements Initializable, Runnable
 {
     Serial serial;
     String commant;
     public static final char UP = 'w'; 
     public static final char DOWN = 's';
     public static final char DIRECTION = 'd';
-    ScreensController myController;
     int steeringWorking = 0, engineWorking = 0; //0... noch nicht überprüft, 1... funktioniert nicht, 2... funktioniert
         
 
@@ -49,18 +52,6 @@ public class SerialViewController implements Initializable, ControlledScreen, Ru
     {
         
     }
-
-    @Override
-    public void setScreenParent(ScreensController screenParent) {
-        myController = screenParent;
-    }
-    
-    @FXML
-    private void BackToRoot(ActionEvent event) 
-    {
-        myController.setScreen(Carduino.screenMenuID);
-    }
-
     
     //speedSlider testen
 
@@ -156,5 +147,16 @@ public class SerialViewController implements Initializable, ControlledScreen, Ru
         }   
         setPicture(steeringWorking, engineWorking); 
         serial.close();
+    }
+
+    @FXML
+    private void ToMenu(ActionEvent event) throws IOException 
+    {
+        Parent p = FXMLLoader.load(getClass().getResource("/view/MenuView.fxml"));
+        Scene s = new Scene(p);
+        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stg.setScene(s);
+        stg.setTitle("Menu");
+        stg.show();
     }
 }

@@ -1,6 +1,7 @@
 package controller;
 
 import carduino.Carduino;
+import java.io.IOException;
 import model.Client;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -8,13 +9,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import util.ControlledScreen;
+import javafx.stage.Stage;
 
-public class ClientViewController implements Initializable, ControlledScreen
+public class ClientViewController implements Initializable
 {
     
     Client client;
@@ -22,7 +27,6 @@ public class ClientViewController implements Initializable, ControlledScreen
     public static final char UP = 'w'; 
     public static final char DOWN = 's';
     public static final char DIRECTION = 'd';
-    ScreensController myController;
    
 
     @FXML
@@ -69,16 +73,16 @@ public class ClientViewController implements Initializable, ControlledScreen
             }
         });
         
-    }    
-    
-    @Override
-    public void setScreenParent(ScreensController screenParent){
-        myController = screenParent;
     }
 
     @FXML
-    private void BackToRoot(ActionEvent event) 
+    private void ToMenu(ActionEvent event) throws IOException 
     {
-        myController.setScreen(Carduino.screenMenuID);
+        Parent p = FXMLLoader.load(getClass().getResource("/view/MenuView.fxml"));
+        Scene s = new Scene(p);
+        Stage stg = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stg.setScene(s);
+        stg.setTitle("Menu");
+        stg.show();
     }
 }
