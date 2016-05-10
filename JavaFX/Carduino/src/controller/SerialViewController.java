@@ -50,7 +50,7 @@ public class SerialViewController implements Initializable, Runnable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        
+        setPicture(0, 0); //Es wird 0 übergeben da beim Start noch nichts überprüft wird.
     }
     
     //speedSlider testen
@@ -95,7 +95,6 @@ public class SerialViewController implements Initializable, Runnable
     public void run() {
         serial = new Serial();
         serial.initialize();
-        setPicture(0, 0); //Es wird 0 übergeben da beim Start noch nichts überprüft wird.
   
     /*Beschleunigugstest*/ 
         try {
