@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Observable;
 import java.util.TooManyListenersException;
+import static model.Serial.serialPort;
 
 public class Serial extends Observable implements SerialPortEventListener {
 
@@ -22,7 +23,7 @@ public class Serial extends Observable implements SerialPortEventListener {
         return serialPort;
     }
 
-    private static final String PORT_NAMES[] = { "COM3", "COM4" };
+    private static final String PORT_NAMES[] = {"COM3", "COM4"};
 
     private BufferedReader input;
 
@@ -38,8 +39,8 @@ public class Serial extends Observable implements SerialPortEventListener {
 
     private static final int DATA_RATE = 115200;
 
-    public void setOutput(String s) throws IOException, NullPointerException  {
-            s=s + '\n';
+    public void setOutput(String s) throws IOException, NullPointerException {
+        s = s + '\n';
         this.output.write(s.getBytes());
     }
 
@@ -63,13 +64,13 @@ public class Serial extends Observable implements SerialPortEventListener {
             serialPort = (SerialPort) portId.open(this.getClass().getName(), TIME_OUT);
             serialPort.disableReceiveTimeout();
             serialPort.enableReceiveThreshold(1);
-            serialPort.setSerialPortParams(DATA_RATE, SerialPort.DATABITS_8, 
+            serialPort.setSerialPortParams(DATA_RATE, SerialPort.DATABITS_8,
                     SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
             input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
             output = serialPort.getOutputStream();
             serialPort.addEventListener(this);
             serialPort.notifyOnDataAvailable(true);
-        } catch (PortInUseException | UnsupportedCommOperationException | 
+        } catch (PortInUseException | UnsupportedCommOperationException |
                 IOException | TooManyListenersException e) {
             System.err.println(e.toString());
         }
@@ -79,6 +80,20 @@ public class Serial extends Observable implements SerialPortEventListener {
         if (serialPort != null) {
             serialPort.removeEventListener();
             serialPort.close();
+        }
+    }
+
+    public void closePort() {
+        try {
+            if (serialPort != null) {
+                serialPort.getInputStream().close();
+                serialPort.getOutputStream().close();
+
+                new CloseThread().start();
+
+            }
+
+        } catch (Exception e) {
         }
     }
 
@@ -94,5 +109,13 @@ public class Serial extends Observable implements SerialPortEventListener {
                 System.err.println(e.toString());
             }
         }
+    }
+}
+
+class CloseThread extends Thread {
+
+    public void run() {
+        serialPort.removeEventListener();
+        serialPort.close();
     }
 }
