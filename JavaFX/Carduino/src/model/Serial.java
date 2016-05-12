@@ -88,7 +88,7 @@ public class Serial extends Observable implements SerialPortEventListener {
             if (serialPort != null) {
                 serialPort.getInputStream().close();
                 serialPort.getOutputStream().close();
-
+                System.out.println("closing port");
                 new CloseThread().start();
 
             }

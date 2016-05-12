@@ -60,6 +60,8 @@ public class SerialViewController implements Initializable, Runnable {
         a.setTitle("Testvorgang");
         Thread test = new Thread(this);
         Thread surveillance = new Thread(new ConnectorControl());
+        test.setDaemon(true);
+        surveillance.setDaemon(true);
         test.start();
         surveillance.start();
     }

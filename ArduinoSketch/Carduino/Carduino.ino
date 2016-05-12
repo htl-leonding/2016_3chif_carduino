@@ -37,12 +37,12 @@ String commant;
 char c;
 
 //Schul W-Lan
-/*const char* ssid = "andi-hotspot";
-  const char* password = "oscaryim";*/
+/*const char* ssid = "htlleonding-ng";
+  const char* password = "";*/
 
 //Daham
-const char* ssid = "3WebCube6352";
-const char* password = "1D3fcf8d";
+const char* ssid = "ASUS";
+const char* password = "";
 
 WiFiServer server(1337);
 static WiFiClient client;
