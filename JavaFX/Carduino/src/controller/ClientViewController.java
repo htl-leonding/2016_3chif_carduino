@@ -54,7 +54,10 @@ public class ClientViewController implements Initializable,Runnable
         //serial = new Serial();
         //serial.initialize();
         //serial.addObserver(this);
-        Thread thread = new Thread(this);
+        Thread threadW = new Thread(this);
+        Thread threadS = new Thread(this);
+        Thread threadD = new Thread(this);
+        Thread threadA = new Thread(this);
         speedSlider.valueProperty().addListener(new ChangeListener() {
 
             @Override
@@ -78,16 +81,54 @@ public class ClientViewController implements Initializable,Runnable
                 client.sendData(commant);
             }
         });
-        pane.setFocusTraversable(true);
+        /*pane.setFocusTraversable(true);
         pane.requestFocus();
         pane.setOnKeyPressed(new  EventHandler<KeyEvent>() {
            @Override
-           public void handle(KeyEvent event) { 
+           public void handle(KeyEvent event) {
+               //set Value
                if (event.getCode() == KeyCode.W) 
                {
-                    if(thread.getState() == Thread.State.NEW)
+                    if(threadS.getState() == Thread.State.RUNNABLE)
                     {
-                        thread.start();
+                        threadS.stop();
+                    }
+                    if(threadW.getState() == Thread.State.NEW)
+                    {
+                        threadW.start();
+                    }
+               }
+               else if (event.getCode() == KeyCode.S) 
+               {
+                    if(threadW.getState() == Thread.State.RUNNABLE)
+                    {
+                        threadW.stop();
+                    }
+                    if(threadS.getState() == Thread.State.NEW)
+                    {
+                        threadS.start();
+                    }
+               }
+               else if (event.getCode() == KeyCode.A) 
+               {
+                    if(threadD.getState() == Thread.State.RUNNABLE)
+                    {
+                        threadD.stop();
+                    }
+                    if(threadA.getState() == Thread.State.NEW)
+                    {
+                        threadA.start();
+                    }
+               }
+               else if (event.getCode() == KeyCode.D) 
+               {
+                    if(threadA.getState() == Thread.State.RUNNABLE)
+                    {
+                        threadA.stop();
+                    }
+                    if(threadD.getState() == Thread.State.NEW)
+                    {
+                        threadD.start();
                     }
                }
            }
@@ -99,11 +140,26 @@ public class ClientViewController implements Initializable,Runnable
            public void handle(KeyEvent event) { 
                if (event.getCode() == KeyCode.W) 
                {
-                   thread.stop();
+                   threadW.stop();
+                   client.sendData("w0");
+               }
+               else if (event.getCode() == KeyCode.S) 
+               {
+                   threadS.stop();
+                   client.sendData("w0");
+               }
+               else if (event.getCode() == KeyCode.D) 
+               {
+                   threadD.stop();
+                   client.sendData("w0");
+               }
+               if (event.getCode() == KeyCode.A) 
+               {
+                   threadA.stop();
                    client.sendData("w0");
                }
            }
-       });
+       });*/
     }   
 
     @FXML
@@ -120,6 +176,6 @@ public class ClientViewController implements Initializable,Runnable
     @Override
     public void run() 
     {
-       client.sendData("w1024");   
+       client.sendData("w1024");   //change with Value (static variable)
     }
 }
