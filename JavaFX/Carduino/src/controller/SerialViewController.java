@@ -39,7 +39,7 @@ public class SerialViewController implements Initializable, Runnable {
     public static final char UP = 'w';
     public static final char DOWN = 's';
     public static final char DIRECTION = 'd';
-    int steeringWorking = 0, engineWorking = 0; //0... noch nicht überprüft, 1... funktioniert nicht, 2... funktioniert
+    int steeringWorking = 0, engineWorking = 0; //0... noch nicht überprüft, 1... funktioniert nicht, 2... funktioniert, 3... wird gerade getestet
 
     @FXML
     private CheckBox stbyCheck;
@@ -74,6 +74,9 @@ public class SerialViewController implements Initializable, Runnable {
         } else if (steeringWorking == 2) {
             Image img = new Image("file:src/res/lenkung_w.png");
             steeringimgView.setImage(img);
+        } else if (steeringWorking == 3) {
+            Image img = new Image("file:src/res/lenkung_t.png");
+            steeringimgView.setImage(img);
         }
 
         if (engineWorking == 0) {
@@ -85,6 +88,9 @@ public class SerialViewController implements Initializable, Runnable {
         } else if (engineWorking == 2) {
             Image img = new Image("file:src/res/motor_w.png");
             engineimgView.setImage(img);
+        } else if (engineWorking == 3) {
+            Image img = new Image("file:src/res/motor_t.png");
+            engineimgView.setImage(img);
         }
     }
 
@@ -95,6 +101,7 @@ public class SerialViewController implements Initializable, Runnable {
 
         /*Beschleunigugstest*/
         try {
+            setPicture(0, 3);
             for (int i = 0; i < 1024; i += 64) {
                 commant = UP + String.valueOf(i);
                 serial.setOutput(commant);
@@ -116,6 +123,7 @@ public class SerialViewController implements Initializable, Runnable {
         setPicture(0, engineWorking);
         /*Lenkungstest*/
         try {
+            setPicture(3, engineWorking);
             for (int i = 514; i <= 1024; i += 64) //Von der Mitte bis ganz rechts.
             {
                 commant = DIRECTION + String.valueOf(i);
