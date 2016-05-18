@@ -5,6 +5,9 @@ import java.io.IOException;
 import model.Client;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -27,7 +30,7 @@ import javafx.stage.Stage;
 public class ClientViewController implements Initializable,Runnable
 {
     
-    static Client client = new Client();
+    private Client client;
     String commant;
     public static final char UP = 'w'; 
     public static final char DOWN = 's';
@@ -48,16 +51,21 @@ public class ClientViewController implements Initializable,Runnable
     private Label speedlb1;
     @FXML
     private StackPane pane;
+    private Thread threadW;
+    private Thread threadS;
+    private Thread threadD;
+    private Thread threadA;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //serial = new Serial();
         //serial.initialize();
         //serial.addObserver(this);
-        Thread threadW = new Thread(this);
-        Thread threadS = new Thread(this);
-        Thread threadD = new Thread(this);
-        Thread threadA = new Thread(this);
+        threadW = new Thread(this);
+        threadS = new Thread(this);
+        threadD = new Thread(this);
+        threadA = new Thread(this);
+        client = new Client();
         speedSlider.valueProperty().addListener(new ChangeListener() {
 
             @Override
@@ -81,7 +89,7 @@ public class ClientViewController implements Initializable,Runnable
                 client.sendData(commant);
             }
         });
-        /*pane.setFocusTraversable(true);
+        pane.setFocusTraversable(true);
         pane.requestFocus();
         pane.setOnKeyPressed(new  EventHandler<KeyEvent>() {
            @Override
@@ -95,6 +103,7 @@ public class ClientViewController implements Initializable,Runnable
                     }
                     if(threadW.getState() == Thread.State.NEW)
                     {
+                        threadW.setName("W");
                         threadW.start();
                     }
                }
@@ -159,7 +168,7 @@ public class ClientViewController implements Initializable,Runnable
                    client.sendData("w0");
                }
            }
-       });*/
+       });
     }   
 
     @FXML
@@ -172,10 +181,24 @@ public class ClientViewController implements Initializable,Runnable
         stg.setTitle("Menu");
         stg.show();
     }
-
     @Override
     public void run() 
     {
-       client.sendData("w1024");   //change with Value (static variable)
+       if(Thread.currentThread().getName().equalsIgnoreCase("W"))
+       {
+           Platform.runLater(new Runnable() {
+               @Override
+               public void run() {
+                   int count = 0;
+                    while(threadW.isAlive() == true)
+                    {
+                        client.sendData("w"+count);   //change with Value (static variable)
+                        count++;
+                    }
+               }
+           });
+           
+           System.out.println("ThreadW used");
+       }
     }
 }
