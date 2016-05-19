@@ -75,7 +75,7 @@ public class SerialViewController implements Initializable, Runnable {
             Image img = new Image("file:src/res/lenkung_w.png");
             steeringimgView.setImage(img);
         } else if (steeringWorking == 3) {
-            Image img = new Image("file:src/res/lenkung_t.png");
+            Image img = new Image("file:src/res/lenkung_t.gif");
             steeringimgView.setImage(img);
         }
 
@@ -89,7 +89,7 @@ public class SerialViewController implements Initializable, Runnable {
             Image img = new Image("file:src/res/motor_w.png");
             engineimgView.setImage(img);
         } else if (engineWorking == 3) {
-            Image img = new Image("file:src/res/motor_t.png");
+            Image img = new Image("file:src/res/motor_t.gif");
             engineimgView.setImage(img);
         }
     }
