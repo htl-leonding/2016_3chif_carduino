@@ -13,6 +13,7 @@
 */
 
 #include <ESP8266WiFi.h>
+#include <Servo.h>
 
 int STBY = D4; //standby
 
@@ -26,7 +27,8 @@ int PWMB = D1; //Speed control
 int BIN1 = D3; //Direction
 int BIN2 = D2; //Direction
 
-int testLED = D8;
+Servo SERVO;
+int in = 0;
 
 int i = 0;
 int val;
@@ -62,6 +64,7 @@ void setup() {
   pinMode(PWMB, OUTPUT);
   pinMode(BIN1, OUTPUT);
   pinMode(BIN2, OUTPUT);
+  SERVO.attach(D8);
 
   //pinMode(testLED, OUTPUT);
 
