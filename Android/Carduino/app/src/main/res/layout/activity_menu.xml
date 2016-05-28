@@ -13,19 +13,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Classic Controller"
+        android:textSize="@dimen/font_size_medium"
         android:id="@+id/classicBtn"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:onClick=""/>
+        android:onClick=""
+        android:background="#00a4ab"
+        android:layout_above="@+id/gyroBtn"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="60dp"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gyro Controller"
+        android:textSize="@dimen/font_size_medium"
         android:id="@+id/gyroBtn"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/classicBtn" />
+        android:background="#00a4ab"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="176dp"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>
