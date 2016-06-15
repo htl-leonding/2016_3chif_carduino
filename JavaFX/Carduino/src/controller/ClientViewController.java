@@ -195,16 +195,16 @@ public class ClientViewController implements Initializable,Runnable
                     @Override
                     public void run() {
 
-                             if(speedSlider.getValue()+1 <= 1024)
-                             {
-                                 speedSlider.setValue(speedSlider.getValue()+1);   //change with Value (static variable)
-                                 System.out.println("ThreadW increases");
-                             }
+                            if(speedSlider.getValue()+1 <= 1024)
+                            {
+                                speedSlider.setValue(speedSlider.getValue()+1);   //change with Value (static variable)
+                                System.out.println("ThreadW increases");
+                            }
                          }
                 });
                 System.out.println("ThreadW used");
             }
-           Thread.currentThread().stop();
+           threadW.stop();
        }
        if(Thread.currentThread().getName().equalsIgnoreCase("S"))
        {
@@ -222,6 +222,11 @@ public class ClientViewController implements Initializable,Runnable
                          }
                 });
                 System.out.println("ThreadS used");
+                try {
+                    threadW.wait(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ClientViewController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             Thread.currentThread().stop();
        }

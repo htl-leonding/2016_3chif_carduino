@@ -37,12 +37,12 @@ String commant;
 char c;
 
 //Schul W-Lan
-/*const char* ssid = "htlleonding-ng";
-  const char* password = "";*/
+/*const char* ssid = "andi-hotspot";
+  const char* password = "oscaryim";*/
 
 //Daham
-const char* ssid = "ASUS";
-const char* password = "";
+const char* ssid = "3WebCube6352";
+const char* password = "1D3fcf8d";
 
 WiFiServer server(1337);
 static WiFiClient client;
@@ -83,22 +83,7 @@ void runCommant() {
   //commant = Serial.read();
   digitalWrite(STBY, HIGH);
   if (c == 'd') {
-    val = commant.substring(1).toInt();
-    Serial.println(val);
-    Serial.println(sensorValue);
-    Serial.println("___________");
-    if (val > sensorValue) {
-      digitalWrite(BIN1, HIGH);
-      digitalWrite(BIN2, LOW);
-      analogWrite(PWMB, 1023);
-      Serial.println("left");
-    }
-    else if (val < sensorValue) {
-      digitalWrite(BIN1, LOW);
-      digitalWrite(BIN2, HIGH);
-      analogWrite(PWMB, 1023);
-      Serial.println("right");
-    }
+	SERVO.write((int)(commant.substring(1).toInt()/5,69));
   }
   if (c == 'w') {
     Serial.println(commant.substring(1).toInt());
@@ -128,14 +113,6 @@ void loop() {
     commant = Serial.readStringUntil('\n');
     runCommant();
   }
-      sensorValue = analogRead(A0);
-  //Serial.println(sensorValue);
-  if (val == sensorValue) {
-    digitalWrite(BIN1, LOW);
-    digitalWrite(BIN2, LOW);
-    Serial.println("fertig");
-  }
-
 }
 
 

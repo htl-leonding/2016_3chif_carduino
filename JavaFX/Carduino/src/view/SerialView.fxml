@@ -11,7 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="195.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SerialViewController">
+<AnchorPane id="AnchorPane" prefHeight="218.0" prefWidth="432.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SerialViewController">
     <children>
       <GridPane alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -20,8 +20,8 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="187.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="143.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="145.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <ImageView fx:id="steeringimgView" fitHeight="124.0" fitWidth="135.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
@@ -29,8 +29,9 @@
             <VBox prefHeight="56.0" prefWidth="216.0" GridPane.rowIndex="1">
                <children>
                   <Label text="Grau ... noch nicht überprüft" textFill="#686767" />
-                  <Label prefHeight="17.0" prefWidth="149.0" text="Rot ... funktioniert nicht" textFill="#fc0000" />
+                  <Label prefHeight="17.0" prefWidth="149.0" text="Rot  ... funktioniert nicht" textFill="#fc0000" />
                   <Label prefHeight="17.0" prefWidth="149.0" text="Grün ... funktioniert" textFill="#12c324" />
+                  <Label text="Gelb ... wird gerade getestet" textFill="#d0da19" />
                </children>
                <GridPane.margin>
                   <Insets left="5.0" />
