@@ -115,6 +115,7 @@ public class ClientViewController implements Initializable,Runnable
                     }
                     if(threadS.getState() == Thread.State.NEW)
                     {
+                        threadS.setName("S");
                         threadS.start();
                     }
                }
@@ -126,6 +127,7 @@ public class ClientViewController implements Initializable,Runnable
                     }
                     if(threadA.getState() == Thread.State.NEW)
                     {
+                        threadA.setName("A");
                         threadA.start();
                     }
                }
@@ -137,6 +139,7 @@ public class ClientViewController implements Initializable,Runnable
                     }
                     if(threadD.getState() == Thread.State.NEW)
                     {
+                        threadD.setName("D");
                         threadD.start();
                     }
                }
@@ -149,22 +152,22 @@ public class ClientViewController implements Initializable,Runnable
            public void handle(KeyEvent event) { 
                if (event.getCode() == KeyCode.W) 
                {
-                   threadW.stop();
+                   threadW.interrupt();
                    client.sendData("w0");
                }
                else if (event.getCode() == KeyCode.S) 
                {
-                   threadS.stop();
+                   threadS.interrupt();
                    client.sendData("w0");
                }
                else if (event.getCode() == KeyCode.D) 
                {
-                   threadD.stop();
+                   threadD.interrupt();
                    client.sendData("w0");
                }
                if (event.getCode() == KeyCode.A) 
                {
-                   threadA.stop();
+                   threadA.interrupt();
                    client.sendData("w0");
                }
            }
@@ -186,19 +189,79 @@ public class ClientViewController implements Initializable,Runnable
     {
        if(Thread.currentThread().getName().equalsIgnoreCase("W"))
        {
-           Platform.runLater(new Runnable() {
-               @Override
-               public void run() {
-                   int count = 0;
-                    while(threadW.isAlive() == true)
-                    {
-                        client.sendData("w"+count);   //change with Value (static variable)
-                        count++;
-                    }
-               }
-           });
-           
-           System.out.println("ThreadW used");
+           while(!threadW.isInterrupted())
+            {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                             if(speedSlider.getValue()+1 <= 1024)
+                             {
+                                 speedSlider.setValue(speedSlider.getValue()+1);   //change with Value (static variable)
+                                 System.out.println("ThreadW increases");
+                             }
+                         }
+                });
+                System.out.println("ThreadW used");
+            }
+           Thread.currentThread().stop();
+       }
+       if(Thread.currentThread().getName().equalsIgnoreCase("S"))
+       {
+            while(!threadS.isInterrupted())
+            {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                             if(speedSlider.getValue()-1 >= -1024)
+                             {
+                                 speedSlider.setValue(speedSlider.getValue()-1);   //change with Value (static variable)
+                                 System.out.println("ThreadS decreases");
+                             }
+                         }
+                });
+                System.out.println("ThreadS used");
+            }
+            Thread.currentThread().stop();
+       }
+       if(Thread.currentThread().getName().equalsIgnoreCase("D"))
+       {
+            while(!threadD.isInterrupted())
+            {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                             if(directionSlider.getValue()+1 <= +1024)
+                             {
+                                 directionSlider.setValue(directionSlider.getValue()+1);   //change with Value (static variable)
+                                 System.out.println("ThreadD increases");
+                             }
+                         }
+                });
+                System.out.println("ThreadD used");
+            }
+           Thread.currentThread().stop();
+       }
+       if(Thread.currentThread().getName().equalsIgnoreCase("A"))
+       {
+            while(!threadA.isInterrupted())
+            {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+
+                             if(directionSlider.getValue()-1 >= -1024)
+                             {
+                                 directionSlider.setValue(directionSlider.getValue()-1);   //change with Value (static variable)
+                                 System.out.println("ThreadA decreases");
+                             }
+                         }
+                });
+                System.out.println("ThreadA used");
+            }
+           Thread.currentThread().stop();
        }
     }
 }

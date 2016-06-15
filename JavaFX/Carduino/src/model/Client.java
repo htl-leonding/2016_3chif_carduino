@@ -44,12 +44,12 @@ public class Client {
             client.close();
         } 
          catch(SocketTimeoutException ex){
-            Alert alert = new Alert(AlertType.ERROR);
+            /*Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error Dialog");
             alert.setHeaderText("Fehler");
             alert.setContentText("Es wurde kein Server gefunden!");
 
-            alert.showAndWait();
+            alert.showAndWait();*/
          }
          catch(UnknownHostException ex){
             Alert alert = new Alert(AlertType.ERROR);
