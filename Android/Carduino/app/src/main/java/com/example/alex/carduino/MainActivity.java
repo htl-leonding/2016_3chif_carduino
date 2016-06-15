@@ -10,8 +10,6 @@ public class MainActivity extends AppCompatActivity {
     public static final char DOWN = 's';
     public static final char DIRECTION = 'd';
 
-    ClientSocket client;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +20,6 @@ public class MainActivity extends AppCompatActivity {
         SeekBar horizontalSeekBar = (SeekBar) findViewById(R.id.horizontalSeekBar);
         final TextView vertext = (TextView) findViewById(R.id.verText);
         final TextView horText = (TextView) findViewById(R.id.horText);
-
-        //client = new ClientSocket(null);
 
 
         verticalSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -38,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 vertext.setText(actProgress);
                 new Thread(new ClientSocket(actProgress)).start();
-              //  client.sendData(actProgress);
             }
 
             @Override

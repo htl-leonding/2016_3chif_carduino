@@ -1,31 +1,34 @@
 package com.example.alex.carduino;
 
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 import android.hardware.SensorEventListener;
-import android.os.UserManager;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
 
 public class MotionSensorActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor sensor;
 
-    private TextView xAxis;
-    private TextView yAxis;
-    private TextView zAxis;
+    ProgressBar verticalProgressBar;
+    ProgressBar horizontalProgressBar;
 
     public static final char UP = 'w';
     public static final char DOWN = 's';
     public static final char DIRECTION = 'd';
-    String actProgress;
+    String actProgressSpeed;
+    String actProgressDirection;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +36,10 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
         setContentView(R.layout.activity_sensor);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        xAxis = (TextView) findViewById(R.id.xOut);
-        yAxis = (TextView) findViewById(R.id.yOut);
-        zAxis = (TextView) findViewById(R.id.zOut);
+        verticalProgressBar = (ProgressBar) findViewById(R.id.verticalProgressBar);
+        verticalProgressBar.setProgress(0);
+        horizontalProgressBar = (ProgressBar) findViewById(R.id.horizontalProgressBar);
+        horizontalProgressBar.setProgress(0);
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -45,26 +49,43 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
 
        @Override
     public void onSensorChanged(SensorEvent event) {
-        xAxis.setText(String.valueOf(event.values[0]));
-        yAxis.setText(String.valueOf(event.values[1]));
-        //zAxis.setText(String.valueOf(event.values[2]));
+           double val = 0;
 
         if (event.values[2] > 5.50 && event.values[0] < 9) {
-            double val = (event.values[2] - 5) * 186.2;
+             val = (event.values[2] - 5) * 186.2;
             if (val > 1024){
                 val = 1024;
             }
-            actProgress = UP + String.valueOf((int)(val));
+            actProgressSpeed = UP + String.valueOf((int)(val));
+            verticalProgressBar.setProgress((int)val);
         }
         else if (event.values[2] < 4.50 && event.values[0] > 9) {
-            double val = (5 - event.values[2]) * 186.2;
+            val = (5 - event.values[2]) * 186.2;
             if (val > 1024){
                 val = 1024;
             }
-            actProgress = DOWN + String.valueOf((int)(val));
+            actProgressSpeed = DOWN + String.valueOf((int)(val));
+            verticalProgressBar.setProgress((int)val);
         }
-        new Thread(new ClientSocket(actProgress)).start();
-        zAxis.setText(String.valueOf(actProgress));
+        new Thread(new ClientSocket(actProgressSpeed)).start();
+           if (event.values[1] >= 5) {
+               val = 1024 - (event.values[1] + 5) * 102.4;
+               if (val < 0){
+                   val = 0;
+               }
+               actProgressDirection = DIRECTION + String.valueOf((int)(val));
+               horizontalProgressBar.setProgress((int) val);
+           }
+           else if (event.values[1] < 5) {
+               val = 1024 - (event.values[1] + 5) * 102.4;
+               if (val > 1024){
+                   val = 1024;
+               }
+               actProgressDirection = DIRECTION + String.valueOf((int)(val));
+               horizontalProgressBar.setProgress((int) val);
+           }
+           new Thread(new ClientSocket(actProgressDirection)).start();
+
 
     }
 
@@ -72,4 +93,18 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
+    @Override
+    protected void onStop() {
+        sensorManager.unregisterListener(this);
+        super.onStop();
+    }
+
+    @Override
+    public void onBackPressed() {
+        sensorManager.unregisterListener(this);
+        super.onBackPressed();
+    }
+
+
 }
