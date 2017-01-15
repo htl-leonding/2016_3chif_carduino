@@ -19,7 +19,6 @@ int STBY = D4; //standby
 
 //Motor A
 int PWMA = D7; //Speed control
-int AIN1 = D5; //Direction
 int AIN2 = D6; //Direction
 
 //Motor B
@@ -58,7 +57,6 @@ void setup() {
   pinMode(STBY, OUTPUT);
 
   pinMode(PWMA, OUTPUT);
-  pinMode(AIN1, OUTPUT);
   pinMode(AIN2, OUTPUT);
 
   pinMode(PWMB, OUTPUT);
@@ -81,20 +79,18 @@ void runCommant() {
   c = commant[0];
   Serial.println(commant);
   //commant = Serial.read();
-  digitalWrite(STBY, HIGH);
+  //digitalWrite(STBY, HIGH);
   if (c == 'd') {
-	SERVO.write((int)(commant.substring(1).toInt()/5,69));
+	SERVO.write((int)(commant.substring(1).toInt()/5.69));
   }
   if (c == 'w') {
     Serial.println(commant.substring(1).toInt());
-    digitalWrite(AIN1, HIGH);
-    digitalWrite(AIN2, LOW);
+    digitalWrite(AIN2, HIGH);
     analogWrite(PWMA, commant.substring(1).toInt());
   }
   if (c == 's') {
     Serial.println(commant.substring(1).toInt());
-    digitalWrite(AIN1, LOW);
-    digitalWrite(AIN2, HIGH);
+    digitalWrite(AIN2, LOW);
     analogWrite(PWMA, commant.substring(1).toInt());
   }
 }
