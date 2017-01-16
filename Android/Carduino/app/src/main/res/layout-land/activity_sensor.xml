@@ -17,6 +17,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+<<<<<<< HEAD
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"
@@ -45,6 +46,29 @@
         android:checked="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+=======
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:max="1024"
+        android:layout_height="wrap_content"
+        android:rotation="270"
+        android:id="@+id/verticalProgressBar"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:indeterminate="false" />
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:max="1024"
+        android:rotation="180"
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontalProgressBar"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:indeterminate="false" />
+>>>>>>> origin/master
 
 
 </RelativeLayout>
