@@ -39,12 +39,13 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
         verticalProgressBar = (ProgressBar) findViewById(R.id.verticalProgressBar);
         horizontalProgressBar = (ProgressBar) findViewById(R.id.horizontalProgressBar);
         stbySwitch = (Switch) findViewById(R.id.stbySwitch);
-
+        stbySwitch.setChecked(false);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
+
 
     @Override
     public void onSensorChanged(SensorEvent event) {
@@ -62,20 +63,15 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
             }
             actProgress = DOWN + String.valueOf((int) (val));
         }
-        stbySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked) {
-                    new Thread(new ClientSocket(UP+"0")).start();
-                }
-                else{
-                    new Thread(new ClientSocket(actProgress)).start();
-                }
-            }
-        });
-
+        if (stbySwitch.isChecked()) {
+            new Thread(new ClientSocket(UP + "0")).start();
+        } else {
+            new Thread(new ClientSocket(actProgress)).start();
+        }
 
     }
+
+
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
