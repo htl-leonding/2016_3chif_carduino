@@ -55,9 +55,6 @@ void setup() {
   pinMode(PWMA, OUTPUT);
   pinMode(AIN2, OUTPUT);
 
-  pinMode(PWMB, OUTPUT);
-  pinMode(BIN1, OUTPUT);
-  pinMode(BIN2, OUTPUT);
   SERVO.attach(D8);
 
   //pinMode(testLED, OUTPUT);

@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape>
+            <size
+                android:height="40dp"
+                android:width="40dp" />
+
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <!--<item android:drawable="@drawable/seekbar_thumb_material_anim"/>-->
+
+</layer-list>

@@ -3,6 +3,7 @@ package com.example.alex.carduino;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         SeekBar verticalSeekBar = (SeekBar) findViewById(R.id.verticalSeekBar);
         SeekBar horizontalSeekBar = (SeekBar) findViewById(R.id.horizontalSeekBar);
+        final Switch stbySwitch = (Switch) findViewById(R.id.stbySwitch);
         final TextView vertext = (TextView) findViewById(R.id.verText);
         final TextView horText = (TextView) findViewById(R.id.horText);
 
@@ -30,15 +32,16 @@ public class MainActivity extends AppCompatActivity {
             String actProgress;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (progress > 1024) {
-                    actProgress = UP + String.valueOf(progress - 1024);
+                if(stbySwitch.isChecked()) {
+                    if (progress > 1024) {
+                        actProgress = UP + String.valueOf(progress - 1024);
+                    } else if (progress < 1024) {
+                        actProgress = DOWN + String.valueOf(1024 - progress);
+                    }
+                    vertext.setText(actProgress);
+                    new Thread(new ClientSocket(actProgress)).start();
                 }
-                else if (progress < 1024) {
-                    actProgress = DOWN + String.valueOf(1024 - progress);
-                }
-                vertext.setText(actProgress);
-                new Thread(new ClientSocket(actProgress)).start();
-              //  client.sendData(actProgress);
+              //  client.sendData(actProgressVertical);
             }
 
             @Override
@@ -73,5 +76,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    @Override
+    public void onBackPressed() {
+        new Thread(new ClientSocket(UP + "0")).start();
+        super.onBackPressed();
+    }
 }

@@ -18,7 +18,8 @@
         android:max="1024"
         android:progress="512"
         android:rotation="180"
-        android:indeterminate="false" />
+        android:indeterminate="false"
+        />
 
     <SeekBar
         android:layout_width="250dp"
@@ -48,4 +49,12 @@
         android:id="@+id/horText"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
+
+    <Switch
+        android:text="STBY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/stbySwitch" />
 </RelativeLayout>

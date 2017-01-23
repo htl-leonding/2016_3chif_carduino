@@ -1,20 +1,16 @@
 package com.example.alex.carduino;
 
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorManager;
 import android.hardware.SensorEventListener;
-import android.os.UserManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Switch;
-import android.widget.TextView;
+import android.util.Log;
 
 public class MotionSensorActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -28,7 +24,8 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
     public static final char UP = 'w';
     public static final char DOWN = 's';
     public static final char DIRECTION = 'd';
-    String actProgress;
+    String actProgressVertical;
+    String actProgressHorizontal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +52,23 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
             if (val > 1024) {
                 val = 1024;
             }
-            actProgress = UP + String.valueOf((int) (val));
+            actProgressVertical = UP + String.valueOf((int) (val));
         } else if (event.values[2] < 4.50 && event.values[0] > 9) {
             double val = (5 - event.values[2]) * 186.2;
             if (val > 1024) {
                 val = 1024;
             }
-            actProgress = DOWN + String.valueOf((int) (val));
+            actProgressVertical = DOWN + String.valueOf((int) (val));
         }
+        double val = ((event.values[1] + 7.5)*68.266666666666666666666666666667);
+        actProgressHorizontal = DIRECTION + String.valueOf((int)val);
+
+        Log.d(String.valueOf(val), "oasch");
         if (stbySwitch.isChecked()) {
             new Thread(new ClientSocket(UP + "0")).start();
         } else {
-            new Thread(new ClientSocket(actProgress)).start();
+            new Thread(new ClientSocket(actProgressVertical)).start();
+            new Thread(new ClientSocket(actProgressHorizontal)).start();
         }
 
     }
@@ -80,6 +82,8 @@ public class MotionSensorActivity extends AppCompatActivity implements SensorEve
 
     @Override
     public void onBackPressed() {
+        new Thread(new ClientSocket(UP + "0")).start();
         sensorManager.unregisterListener(this);
+        super.onBackPressed();
     }
 }
